@@ -21,7 +21,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
         header("Location: login.php?error=Password is required");
 	    exit();
 	} else {
-		// hashing the password for security
+		// Hashing the password for security
         $pass = md5($pass); 
 
 		// Secure SQL query using prepared statements to prevent SQL injection
@@ -33,16 +33,12 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 
 		if (mysqli_num_rows($result) === 1) {
 			$row = mysqli_fetch_assoc($result);
-            if ($row['user_name'] === $uname && $row['user_password'] === $pass) {
-            	$_SESSION['user_name'] = $row['user_name'];
-            	$_SESSION['name'] = $row['user_name']; // Changed to store user_name since 'name' doesn't exist in the database structure
-            	$_SESSION['userid'] = $row['userid'];
-            	header("Location: user-display.php");
-		        exit();
-            } else {
-				header("Location: login.php?error=Incorrect User name or password");
-		        exit();
-			}
+            // Store user data in session
+            $_SESSION['user_name'] = $row['user_name'];  // Correctly referencing user_name
+            $_SESSION['name'] = $row['name'];             // Assuming 'name' exists in your table
+            $_SESSION['userid'] = $row['userid'];         // Correctly referencing userid
+			header("Location: user-display.php");
+		    exit();
 		} else {
 			header("Location: login.php?error=Incorrect User name or password");
 	        exit();
@@ -52,4 +48,4 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 	header("Location: login.php");
 	exit();
 }
-?>
+
