@@ -1,69 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>SIGN UP</title>
 	<link rel="stylesheet" type="text/css" href="loginphp.css">
 </head>
 <body>
 
-     <form action="signup-check.php" method="post">
+    <!-- Signup Form -->
+    <form action="signup-check.php" method="post">
      	<h2>SIGN UP</h2>
+
+        <!-- Error Message -->
      	<?php if (isset($_GET['error'])) { ?>
-     		<p class="error"><?php echo $_GET['error']; ?></p>
+     		<p class="error"><?php echo htmlspecialchars($_GET['error']); ?></p>
      	<?php } ?>
 
-          <?php if (isset($_GET['success'])) { ?>
-               <p class="success"><?php echo $_GET['success']; ?></p>
-          <?php } ?>
+        <!-- Success Message -->
+        <?php if (isset($_GET['success'])) { ?>
+            <p class="success"><?php echo htmlspecialchars($_GET['success']); ?></p>
+        <?php } ?>
 
-          <label>Name</label>
-          <?php if (isset($_GET['name'])) { ?>
-               <input type="text" 
-                      name="name" 
-                      placeholder="Name"
-                      value="<?php echo $_GET['name']; ?>"><br>
-          <?php }else{ ?>
-               <input type="text" 
-                      name="name" 
-                      placeholder="Name"><br>
-          <?php }?>
+        <!-- Name Input Field -->
+        <label>Name</label>
+        <input type="text" 
+               name="name" 
+               placeholder="Name" 
+               value="<?php echo isset($_GET['name']) ? htmlspecialchars($_GET['name']) : ''; ?>" required><br>
 
-          <label>User Name</label>
-          <?php if (isset($_GET['uname'])) { ?>
-               <input type="text" 
-                      name="uname" 
-                      placeholder="User Name"
-                      value="<?php echo $_GET['uname']; ?>"><br>
-          <?php }else{ ?>
-               <input type="text" 
-                      name="uname" 
-                      placeholder="User Name"><br>
-          <?php }?>
+        <!-- User Name Input Field -->
+        <label>User Name</label>
+        <input type="text" 
+               name="uname" 
+               placeholder="User Name" 
+               value="<?php echo isset($_GET['uname']) ? htmlspecialchars($_GET['uname']) : ''; ?>" required><br>
 
-          <label>Phone Number</label>
-          <?php if (isset($_GET['phone'])) { ?>
-               <input type="text" 
-                      name="phone" 
-                      placeholder="Phone Number"
-                      value="<?php echo $_GET['phone']; ?>"><br>
-          <?php }else{ ?>
-               <input type="text" 
-                      name="phone" 
-                      placeholder="Phone Number"><br>
-          <?php }?>
+        <!-- Phone Number Input Field -->
+        <label>Phone Number</label>
+        <input type="text" 
+               name="phone" 
+               placeholder="Phone Number" 
+               value="<?php echo isset($_GET['phone']) ? htmlspecialchars($_GET['phone']) : ''; ?>" required><br>
 
+        <!-- Password Input Field -->
      	<label>Password</label>
-     	<input type="password" 
-                 name="password" 
-                 placeholder="Password"><br>
+     	<input type="password" name="password" placeholder="Password" required><br>
 
-          <label>Re Password</label>
-          <input type="password" 
-                 name="re_password" 
-                 placeholder="Re_Password"><br>
+        <!-- Re-Password Input Field -->
+        <label>Re Password</label>
+        <input type="password" name="re_password" placeholder="Re_Password" required><br>
 
-     	<button type="submit">Sign Up</button>
-          <a href="login.php" class="ca">Already have an account?</a>
-     </form>
+        <button type="submit">Sign Up</button>
+        <a href="login.php" class="ca">Already have an account?</a>
+    </form>
 </body>
 </html>
